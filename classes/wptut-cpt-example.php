@@ -1,18 +1,18 @@
 <?php
 
-if ( ! class_exists( 'WPPS_CPT_Example' ) ) {
+if ( ! class_exists( 'WPTUT_CPT_Example' ) ) {
 
 	/**
 	 * Creates a custom post type and associated taxonomies
 	 */
-	class WPPS_CPT_Example extends WPPS_Module implements WPPS_Custom_Post_Type {
+	class WPTUT_CPT_Example extends WPTUT_Module implements WPTUT_Custom_Post_Type {
 		protected static $readable_properties  = array();
 		protected static $writeable_properties = array();
 
 		const POST_TYPE_NAME = 'WPPS Custom Post Type';
-		const POST_TYPE_SLUG = 'wpps-cpt';
+		const POST_TYPE_SLUG = 'wptut-cpt';
 		const TAG_NAME       = 'WPPS Custom Taxonomy';
-		const TAG_SLUG       = 'wpps-custom-tax';
+		const TAG_SLUG       = 'wptut-custom-tax';
 
 
 		/*
@@ -92,7 +92,7 @@ if ( ! class_exists( 'WPPS_CPT_Example' ) ) {
 				'supports'             => array( 'title', 'editor', 'author', 'thumbnail', 'revisions' )
 			);
 
-			return apply_filters( 'wpps_post-type-params', $post_type_params );
+			return apply_filters( 'wptut_post-type-params', $post_type_params );
 		}
 
 		/**
@@ -123,7 +123,7 @@ if ( ! class_exists( 'WPPS_CPT_Example' ) ) {
 				'update_count_callback' => '_update_post_term_count'
 			);
 
-			return apply_filters( 'wpps_tag-taxonomy-params', $tag_taxonomy_params );
+			return apply_filters( 'wptut_tag-taxonomy-params', $tag_taxonomy_params );
 		}
 
 		/**
@@ -133,7 +133,7 @@ if ( ! class_exists( 'WPPS_CPT_Example' ) ) {
 		 */
 		public static function add_meta_boxes() {
 			add_meta_box(
-				'wpps_example-box',
+				'wptut_example-box',
 				'Example Box',
 				__CLASS__ . '::markup_meta_boxes',
 				self::POST_TYPE_SLUG,
@@ -154,15 +154,15 @@ if ( ! class_exists( 'WPPS_CPT_Example' ) ) {
 			$variables = array();
 
 			switch ( $box['id'] ) {
-				case 'wpps_example-box':
-					$variables['exampleBoxField'] = get_post_meta( $post->ID, 'wpps_example-box-field', true );
-					$view                         = 'wpps-cpt-example/metabox-example-box.php';
+				case 'wptut_example-box':
+					$variables['exampleBoxField'] = get_post_meta( $post->ID, 'wptut_example-box-field', true );
+					$view                         = 'wptut-cpt-example/metabox-example-box.php';
 					break;
 
 				/*
-				case 'wpps_some-other-box':
-					$variables['someOtherField'] = get_post_meta( $post->ID, 'wpps_some-other-field', true );
-				 	$view                        = 'wpps-cpt-example/metabox-another-box.php';
+				case 'wptut_some-other-box':
+					$variables['someOtherField'] = get_post_meta( $post->ID, 'wptut_some-other-field', true );
+				 	$view                        = 'wptut-cpt-example/metabox-another-box.php';
 					break;
 				*/
 
@@ -186,13 +186,13 @@ if ( ! class_exists( 'WPPS_CPT_Example' ) ) {
 		 */
 		public static function is_protected_meta( $protected, $meta_key, $meta_type ) {
 			switch( $meta_key ) {
-				case 'wpps_example-box':
-				case 'wpps_example-box2':
+				case 'wptut_example-box':
+				case 'wptut_example-box2':
 					$protected = true;
 					break;
 
-				case 'wpps_some-other-box':
-				case 'wpps_some-other-box2':
+				case 'wptut_some-other-box':
+				case 'wptut_some-other-box2':
 					$protected = false;
 					break;
 			}
@@ -236,9 +236,9 @@ if ( ! class_exists( 'WPPS_CPT_Example' ) ) {
 		 * @param array $new_values
 		 */
 		protected static function save_custom_fields( $post_id, $new_values ) {
-			if ( isset( $new_values[ 'wpps_example-box-field' ] ) ) {
+			if ( isset( $new_values[ 'wptut_example-box-field' ] ) ) {
 				if ( false ) { // some business logic check
-					update_post_meta( $post_id, 'wpps_example-box-field', $new_values[ 'wpps_example-box-field' ] );
+					update_post_meta( $post_id, 'wptut_example-box-field', $new_values[ 'wptut_example-box-field' ] );
 				} else {
 					add_notice( 'Example of failing validation', 'error' );
 				}
@@ -246,7 +246,7 @@ if ( ! class_exists( 'WPPS_CPT_Example' ) ) {
 		}
 
 		/**
-		 * Defines the [wpps-cpt-shortcode] shortcode
+		 * Defines the [wptut-cpt-shortcode] shortcode
 		 *
 		 * @mvc Controller
 		 *
@@ -254,10 +254,10 @@ if ( ! class_exists( 'WPPS_CPT_Example' ) ) {
 		 * return string
 		 */
 		public static function cpt_shortcode_example( $attributes ) {
-			$attributes = apply_filters( 'wpps_cpt-shortcode-example-attributes', $attributes );
+			$attributes = apply_filters( 'wptut_cpt-shortcode-example-attributes', $attributes );
 			$attributes = self::validate_cpt_shortcode_example_attributes( $attributes );
 
-			return self::render_template( 'wpps-cpt-example/shortcode-cpt-shortcode-example.php', array( 'attributes' => $attributes ) );
+			return self::render_template( 'wptut-cpt-example/shortcode-cpt-shortcode-example.php', array( 'attributes' => $attributes ) );
 		}
 
 		/**
@@ -276,7 +276,7 @@ if ( ! class_exists( 'WPPS_CPT_Example' ) ) {
 				$attributes['foo'] = $defaults['foo'];
 			}
 
-			return apply_filters( 'wpps_validate-cpt-shortcode-example-attributes', $attributes );
+			return apply_filters( 'wptut_validate-cpt-shortcode-example-attributes', $attributes );
 		}
 
 		/**
@@ -292,7 +292,7 @@ if ( ! class_exists( 'WPPS_CPT_Example' ) ) {
 				'bar' => 'foo'
 			);
 
-			return apply_filters( 'wpps_default-cpt-shortcode-example-attributes', $attributes );
+			return apply_filters( 'wptut_default-cpt-shortcode-example-attributes', $attributes );
 		}
 
 
@@ -372,5 +372,5 @@ if ( ! class_exists( 'WPPS_CPT_Example' ) ) {
 		protected function is_valid( $property = 'all' ) {
 			return true;
 		}
-	} // end WPPS_CPT_Example
+	} // end WPTUT_CPT_Example
 }

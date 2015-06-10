@@ -1,11 +1,11 @@
 <?php
 
-if ( ! class_exists( 'WPPS_Settings' ) ) {
+if ( ! class_exists( 'WPTUT_Settings' ) ) {
 
 	/**
 	 * Handles plugin settings and user profile meta fields
 	 */
-	class WPPS_Settings extends WPPS_Module {
+	class WPTUT_Settings extends WPTUT_Module {
 		protected $settings;
 		protected static $default_settings;
 		protected static $readable_properties  = array( 'settings' );
@@ -35,17 +35,17 @@ if ( ! class_exists( 'WPPS_Settings' ) ) {
 		 * @mvc Controller
 		 *
 		 * @param string $variable
-		 * @param array  $value This will be merged with WPPS_Settings->settings, so it should mimic the structure of the WPPS_Settings::$default_settings. It only needs the contain the values that will change, though. See WordPress_Plugin_Skeleton->upgrade() for an example.
+		 * @param array  $value This will be merged with WPTUT_Settings->settings, so it should mimic the structure of the WPTUT_Settings::$default_settings. It only needs the contain the values that will change, though. See Unsold_Tickets_AddOn->upgrade() for an example.
 		 */
 		public function __set( $variable, $value ) {
-			// Note: WPPS_Module::__set() is automatically called before this
+			// Note: WPTUT_Module::__set() is automatically called before this
 
 			if ( $variable != 'settings' ) {
 				return;
 			}
 
 			$this->settings = self::validate_settings( $value );
-			update_option( 'wpps_settings', $this->settings );
+			update_option( 'wptut_settings', $this->settings );
 		}
 
 		/**
@@ -64,7 +64,7 @@ if ( ! class_exists( 'WPPS_Settings' ) ) {
 			add_action( 'admin_init',               array( $this, 'register_settings' ) );
 
 			add_filter(
-				'plugin_action_links_' . plugin_basename( dirname( __DIR__ ) ) . '/bootstrap.php',
+				'plugin_action_links_' . plugin_basename( dirname( __DIR__ ) ) . '/unsold_tickets_addon.php',
 				__CLASS__ . '::add_plugin_action_links'
 			);
 		}
@@ -165,7 +165,7 @@ if ( ! class_exists( 'WPPS_Settings' ) ) {
 		protected static function get_settings() {
 			$settings = shortcode_atts(
 				self::$default_settings,
-				get_option( 'wpps_settings', array() )
+				get_option( 'wptut_settings', array() )
 			);
 
 			return $settings;
@@ -180,8 +180,8 @@ if ( ! class_exists( 'WPPS_Settings' ) ) {
 		 * @return array
 		 */
 		public static function add_plugin_action_links( $links ) {
-			array_unshift( $links, '<a href="http://wordpress.org/extend/plugins/wordpress-plugin-skeleton/faq/">Help</a>' );
-			array_unshift( $links, '<a href="options-general.php?page=' . 'wpps_settings">Settings</a>' );
+			array_unshift( $links, '<a href="http://wordpress.org/extend/plugins/unsold-tickets-addon/faq/">Help</a>' );
+			array_unshift( $links, '<a href="options-general.php?page=' . 'wptut_settings">Settings</a>' );
 
 			return $links;
 		}
@@ -194,10 +194,10 @@ if ( ! class_exists( 'WPPS_Settings' ) ) {
 		public static function register_settings_pages() {
 			add_submenu_page(
 				'options-general.php',
-				WPPS_NAME . ' Settings',
-				WPPS_NAME,
+				WPTUT_NAME . ' Settings',
+				WPTUT_NAME,
 				self::REQUIRED_CAPABILITY,
-				'wpps_settings',
+				'wptut_settings',
 				__CLASS__ . '::markup_settings_page'
 			);
 		}
@@ -209,7 +209,7 @@ if ( ! class_exists( 'WPPS_Settings' ) ) {
 		 */
 		public static function markup_settings_page() {
 			if ( current_user_can( self::REQUIRED_CAPABILITY ) ) {
-				echo self::render_template( 'wpps-settings/page-settings.php' );
+				echo self::render_template( 'wptut-settings/page-settings.php' );
 			} else {
 				wp_die( 'Access denied.' );
 			}
@@ -225,19 +225,19 @@ if ( ! class_exists( 'WPPS_Settings' ) ) {
 			 * Basic Section
 			 */
 			add_settings_section(
-				'wpps_section-basic',
+				'wptut_section-basic',
 				'Basic Settings',
 				__CLASS__ . '::markup_section_headers',
-				'wpps_settings'
+				'wptut_settings'
 			);
 
 			add_settings_field(
-				'wpps_field-example1',
+				'wptut_field-example1',
 				'Example Field 1',
 				array( $this, 'markup_fields' ),
-				'wpps_settings',
-				'wpps_section-basic',
-				array( 'label_for' => 'wpps_field-example1' )
+				'wptut_settings',
+				'wptut_section-basic',
+				array( 'label_for' => 'wptut_field-example1' )
 			);
 
 
@@ -245,26 +245,26 @@ if ( ! class_exists( 'WPPS_Settings' ) ) {
 			 * Advanced Section
 			 */
 			add_settings_section(
-				'wpps_section-advanced',
+				'wptut_section-advanced',
 				'Advanced Settings',
 				__CLASS__ . '::markup_section_headers',
-				'wpps_settings'
+				'wptut_settings'
 			);
 
 			add_settings_field(
-				'wpps_field-example2',
+				'wptut_field-example2',
 				'Example Field 2',
 				array( $this, 'markup_fields' ),
-				'wpps_settings',
-				'wpps_section-advanced',
-				array( 'label_for' => 'wpps_field-example2' )
+				'wptut_settings',
+				'wptut_section-advanced',
+				array( 'label_for' => 'wptut_field-example2' )
 			);
 
 
 			// The settings container
 			register_setting(
-				'wpps_settings',
-				'wpps_settings',
+				'wptut_settings',
+				'wptut_settings',
 				array( $this, 'validate_settings' )
 			);
 		}
@@ -277,7 +277,7 @@ if ( ! class_exists( 'WPPS_Settings' ) ) {
 		 * @param array $section
 		 */
 		public static function markup_section_headers( $section ) {
-			echo self::render_template( 'wpps-settings/page-settings-section-headers.php', array( 'section' => $section ), 'always' );
+			echo self::render_template( 'wptut-settings/page-settings-section-headers.php', array( 'section' => $section ), 'always' );
 		}
 
 		/**
@@ -289,12 +289,12 @@ if ( ! class_exists( 'WPPS_Settings' ) ) {
 		 */
 		public function markup_fields( $field ) {
 			switch ( $field['label_for'] ) {
-				case 'wpps_field-example1':
+				case 'wptut_field-example1':
 					// Do any extra processing here
 					break;
 			}
 
-			echo self::render_template( 'wpps-settings/page-settings-fields.php', array( 'settings' => $this->settings, 'field' => $field ), 'always' );
+			echo self::render_template( 'wptut-settings/page-settings-fields.php', array( 'settings' => $this->settings, 'field' => $field ), 'always' );
 		}
 
 		/**
@@ -309,7 +309,7 @@ if ( ! class_exists( 'WPPS_Settings' ) ) {
 			$new_settings = shortcode_atts( $this->settings, $new_settings );
 
 			if ( ! is_string( $new_settings['db-version'] ) ) {
-				$new_settings['db-version'] = WordPress_Plugin_Skeleton::VERSION;
+				$new_settings['db-version'] = Unsold_Tickets_AddOn::VERSION;
 			}
 
 
@@ -346,7 +346,7 @@ if ( ! class_exists( 'WPPS_Settings' ) ) {
 		 * @param object
 		 */
 		public static function add_user_fields( $user ) {
-			echo self::render_template( 'wpps-settings/user-fields.php', array( 'user' => $user ) );
+			echo self::render_template( 'wptut-settings/user-fields.php', array( 'user' => $user ) );
 		}
 
 		/**
@@ -359,8 +359,8 @@ if ( ! class_exists( 'WPPS_Settings' ) ) {
 		public static function save_user_fields( $user_id ) {
 			$user_fields = self::validate_user_fields( $user_id, $_POST );
 
-			update_user_meta( $user_id, 'wpps_user-example-field1', $user_fields[ 'wpps_user-example-field1' ] );
-			update_user_meta( $user_id, 'wpps_user-example-field2', $user_fields[ 'wpps_user-example-field2' ] );
+			update_user_meta( $user_id, 'wptut_user-example-field1', $user_fields[ 'wptut_user-example-field1' ] );
+			update_user_meta( $user_id, 'wptut_user-example-field2', $user_fields[ 'wptut_user-example-field2' ] );
 		}
 
 		/**
@@ -373,21 +373,21 @@ if ( ! class_exists( 'WPPS_Settings' ) ) {
 		 * @return array
 		 */
 		public static function validate_user_fields( $user_id, $user_fields ) {
-			if ( $user_fields[ 'wpps_user-example-field1' ] == false ) {
-				$user_fields[ 'wpps_user-example-field1' ] = true;
+			if ( $user_fields[ 'wptut_user-example-field1' ] == false ) {
+				$user_fields[ 'wptut_user-example-field1' ] = true;
 				add_notice( 'Example Field 1 should be true', 'error' );
 			}
 
 			if ( ! current_user_can( 'manage_options' ) ) {
-				$current_field2 = get_user_meta( $user_id, 'wpps_user-example-field2', true );
+				$current_field2 = get_user_meta( $user_id, 'wptut_user-example-field2', true );
 
-				if ( $current_field2 != $user_fields[ 'wpps_user-example-field2' ] ) {
-					$user_fields[ 'wpps_user-example-field2' ] = $current_field2;
+				if ( $current_field2 != $user_fields[ 'wptut_user-example-field2' ] ) {
+					$user_fields[ 'wptut_user-example-field2' ] = $current_field2;
 					add_notice( 'Only administrators can change Example Field 2.', 'error' );
 				}
 			}
 
 			return $user_fields;
 		}
-	} // end WPPS_Settings
+	} // end WPTUT_Settings
 }

@@ -2,24 +2,24 @@
  * Wrapper function to safely use $
  */
 function wppsWrapper( $ ) {
-	var wpps = {
+	var wptut = {
 
 		/**
 		 * Main entry point
 		 */
 		init: function () {
-			wpps.prefix      = 'wpps_';
-			wpps.templateURL = $( '#template-url' ).val();
-			wpps.ajaxPostURL = $( '#ajax-post-url' ).val();
+			wptut.prefix      = 'wptut_';
+			wptut.templateURL = $( '#template-url' ).val();
+			wptut.ajaxPostURL = $( '#ajax-post-url' ).val();
 
-			wpps.registerEventHandlers();
+			wptut.registerEventHandlers();
 		},
 
 		/**
 		 * Registers event handlers
 		 */
 		registerEventHandlers: function () {
-			$( '#example-container' ).children( 'a' ).click( wpps.exampleHandler );
+			$( '#example-container' ).children( 'a' ).click( wptut.exampleHandler );
 		},
 
 		/**
@@ -32,9 +32,9 @@ function wppsWrapper( $ ) {
 
 			event.preventDefault();
 		}
-	}; // end wpps
+	}; // end wptut
 
-	$( document ).ready( wpps.init );
+	$( document ).ready( wptut.init );
 
 } // end wppsWrapper()
 

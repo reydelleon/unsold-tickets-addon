@@ -1,11 +1,11 @@
 <?php
 
-if ( ! class_exists( 'WPPS_Module' ) ) {
+if ( ! class_exists( 'WPTUT_Module' ) ) {
 
 	/**
 	 * Abstract class to define/implement base methods for all module classes
 	 */
-	abstract class WPPS_Module {
+	abstract class WPTUT_Module {
 		private static $instances = array();
 
 
@@ -91,13 +91,13 @@ if ( ! class_exists( 'WPPS_Module' ) ) {
 		 * @return string
 		 */
 		protected static function render_template( $default_template_path = false, $variables = array(), $require = 'once' ) {
-			do_action( 'wpps_render_template_pre', $default_template_path, $variables );
+			do_action( 'wptut_render_template_pre', $default_template_path, $variables );
 
 			$template_path = locate_template( basename( $default_template_path ) );
 			if ( ! $template_path ) {
 				$template_path = dirname( __DIR__ ) . '/views/' . $default_template_path;
 			}
-			$template_path = apply_filters( 'wpps_template_path', $template_path );
+			$template_path = apply_filters( 'wptut_template_path', $template_path );
 
 			if ( is_file( $template_path ) ) {
 				extract( $variables );
@@ -109,12 +109,12 @@ if ( ! class_exists( 'WPPS_Module' ) ) {
 					require_once( $template_path );
 				}
 
-				$template_content = apply_filters( 'wpps_template_content', ob_get_clean(), $default_template_path, $template_path, $variables );
+				$template_content = apply_filters( 'wptut_template_content', ob_get_clean(), $default_template_path, $template_path, $variables );
 			} else {
 				$template_content = '';
 			}
 
-			do_action( 'wpps_render_template_post', $default_template_path, $variables, $template_path, $template_content );
+			do_action( 'wptut_render_template_post', $default_template_path, $variables, $template_path, $template_content );
 			return $template_content;
 		}
 
@@ -178,5 +178,5 @@ if ( ! class_exists( 'WPPS_Module' ) ) {
 		 * @return bool
 		 */
 		abstract protected function is_valid( $property = 'all' );
-	} // end WPPS_Module
+	} // end WPTUT_Module
 }

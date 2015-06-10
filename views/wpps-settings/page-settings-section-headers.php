@@ -1,8 +1,8 @@
-<?php if ( 'wpps_section-basic' == $section['id'] ) : ?>
+<?php if ( 'wptut_section-basic' == $section['id'] ) : ?>
 
 	<p>Example section introduction.</p>
 
-<?php elseif ( 'wpps_section-advanced' == $section['id'] ) : ?>
+<?php elseif ( 'wptut_section-advanced' == $section['id'] ) : ?>
 
 	<p>Another example section introduction.</p>
 

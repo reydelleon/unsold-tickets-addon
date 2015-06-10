@@ -1,11 +1,11 @@
 <?php
 
-if ( ! interface_exists( 'WPPS_Custom_Post_Type' ) ) {
+if ( ! interface_exists( 'WPTUT_Custom_Post_Type' ) ) {
 
 	/**
 	 * Defines interface for custom post type classes
 	 */
-	interface WPPS_Custom_Post_Type {
+	interface WPTUT_Custom_Post_Type {
 
 		/**
 		 * Registers the custom post type
@@ -57,5 +57,5 @@ if ( ! interface_exists( 'WPPS_Custom_Post_Type' ) ) {
 		 * @return bool
 		 */
 		public static function is_protected_meta( $protected, $meta_key, $meta_type );
-	} // end WPPS_Custom_Post_Type
+	} // end WPTUT_Custom_Post_Type
 }
