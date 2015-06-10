@@ -66,10 +66,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-unsold-tickets-addon.php';
  *
  * @since    0.1.0
  */
-function run_plugin_name() {
+function run_unsold_tickets_addon() {
 
 	$plugin = new Unsold_Tickets_AddOn();
 	$plugin->run();
-
 }
-run_plugin_name();
+
+run_unsold_tickets_addon();

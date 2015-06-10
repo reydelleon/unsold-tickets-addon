@@ -68,7 +68,7 @@ class Unsold_Tickets_AddOn {
 	 */
 	public function __construct() {
 
-		$this->plugin_name = 'plugin-name';
+		$this->plugin_name = 'unsold-tickets-addon';
 		$this->version = '0.1.0';
 
 		$this->load_dependencies();
