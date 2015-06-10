@@ -142,7 +142,7 @@ if ( ! class_exists( 'Unsold_Tickets_AddOn' ) ) {
 				$module->activate( $network_wide );
 			}
 
-			flush_rewrite_rules();
+//			flush_rewrite_rules(); //TODO This needs to be activated in case you use custom posts.
 		}
 
 		/**
@@ -155,7 +155,7 @@ if ( ! class_exists( 'Unsold_Tickets_AddOn' ) ) {
 				$module->deactivate();
 			}
 
-			flush_rewrite_rules();
+//			flush_rewrite_rules(); //TODO This needs to be activated in case you use custom posts.
 		}
 
 		/**
