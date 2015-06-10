@@ -31,7 +31,7 @@ if ( ! class_exists( 'Unsold_Tickets_AddOn' ) ) {
 
 			$this->modules = array(
 				'WPTUT_Settings'    => WPTUT_Settings::get_instance(),
-				'WPTUT_CPT_Example' => WPTUT_CPT_Example::get_instance(),
+//				'WPTUT_CPT_Example' => WPTUT_CPT_Example::get_instance(),
 				'WPTUT_Cron'        => WPTUT_Cron::get_instance()
 			);
 		}

@@ -64,8 +64,8 @@ if ( wptut_requirements_met() ) {
 	require_once( __DIR__ . '/classes/wptut-module.php' );
 	require_once( __DIR__ . '/classes/unsold-tickets-addon.php' );
 	require_once( __DIR__ . '/includes/admin-notice-helper/admin-notice-helper.php' );
-	require_once( __DIR__ . '/classes/wptut-custom-post-type.php' );
-	require_once( __DIR__ . '/classes/wptut-cpt-example.php' );
+//	require_once( __DIR__ . '/classes/wptut-custom-post-type.php' );
+//	require_once( __DIR__ . '/classes/wptut-cpt-example.php' );
 	require_once( __DIR__ . '/classes/wptut-settings.php' );
 	require_once( __DIR__ . '/classes/wptut-cron.php' );
 	require_once( __DIR__ . '/classes/wptut-instance-class.php' );
