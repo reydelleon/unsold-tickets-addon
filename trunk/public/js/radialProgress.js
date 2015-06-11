@@ -17,7 +17,7 @@
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ HOLDERS BE LIABLE FOR ANY CLAIM, DA    MAGES OR OTHER LIABILITY,
  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  OTHER DEALINGS IN THE SOFTWARE.
@@ -28,8 +28,6 @@ function radialProgress(parent) {
         _duration= 1000,
         _selection,
         _margin = {top:0, right:0, bottom:30, left:0},
-        __width = 300,
-        __height = 300,
         _diameter,
         _label="",
         _fontSize=10;
@@ -64,10 +62,6 @@ function radialProgress(parent) {
             var enter = svg.enter().append("svg").attr("class","radial-svg").append("g");
 
             measure();
-
-            svg.attr("width", __width)
-                .attr("height", __height);
-
 
             var background = enter.append("g").attr("class","component")
                 .attr("cursor","pointer")

@@ -45,7 +45,6 @@
 
                 radialProgress(charts.get(index))
                     .label(chart_label)
-                    //.onClick(onClick1)
                     .diameter(chart_diameter)
                     .value(chart_value)
                     .render();

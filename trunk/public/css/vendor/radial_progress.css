@@ -58,4 +58,6 @@
 .radial-svg {
     display: block;
     margin: 0 auto;
+    width: 200px;
+    height: 200px;
 }
