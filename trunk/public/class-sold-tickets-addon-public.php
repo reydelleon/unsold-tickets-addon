@@ -73,6 +73,7 @@ class Sold_Tickets_Addon_Public {
          */
 
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/sold-tickets-addon-public.css', array(), $this->version, 'all');
+        wp_enqueue_style('radial-progress', plugin_dir_url(__FILE__) . 'css/vendor/radial_progress.css', array(), $this->version, 'all');
     }
 
     /**
@@ -95,6 +96,8 @@ class Sold_Tickets_Addon_Public {
          */
 
         wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/sold-tickets-addon-public.js', array('jquery'), $this->version, false);
+        wp_enqueue_script('d3js', '//d3js.org/d3.v3.min.js', array(), $this->version, false);
+        wp_enqueue_script('radial-progress', plugin_dir_url(__FILE__) . 'js/vendor/radialProgress.js', array('d3js'), $this->version, false);
     }
 
     /**
@@ -103,6 +106,16 @@ class Sold_Tickets_Addon_Public {
      * @since    1.0.0
      */
     public function tickets_sold_shortcode($attrs, $content = null) {
-        include 'partials/sold-tickets-addon-default-shortcode-display.php';
+        // Required step when using is_plugin_active() in the front end
+        include_once(ABSPATH . 'wp-admin/includes/plugin.php');
+
+        // Is Tickera activated?
+        if (is_plugin_active('tickera-event-ticketing-system/tickera.php')) {
+            // Get the remaining tickets amount
+            $tickets_sold = tc_get_event_tickets_count_sold(53);
+            $tickets_left = tc_get_event_tickets_count_left(53);
+
+            include 'partials/sold-tickets-addon-default-shortcode-display.php';
+        }
     }
 }
