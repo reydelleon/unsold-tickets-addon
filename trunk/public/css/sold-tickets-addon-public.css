@@ -2,3 +2,69 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
+.sold-tickets-addon.widget {
+    display: inline-block;
+    max-width: 400px;
+    padding: 30px;
+}
+
+/*Minimal grid for the widget. Prefixed with sta to avoid potential conflicts
+============================================================================*/
+.sta-grid-container {
+    padding: 0 10px;
+    margin: 0 auto;
+}
+
+.sta-grid-container * {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.sta-grid-container > [class^="sta-grid-"] {
+    float: left;
+    min-height: 1px;
+    padding: 0 5px;
+}
+
+/*Columns
+=====================================*/
+.sta-grid-1 {
+    width: 25%;
+}
+
+.sta-grid-2 {
+    width: 50%;
+}
+
+.sta-grid-3 {
+    width: 75%;
+}
+
+.sta-grid-4 {
+    width: 100%;
+}
+
+.clear-fix:after,
+.sta-grid-container:after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+
+/*Visual styles
+===================================*/
+.sold-tickets-addon.widget {
+    background-color: antiquewhite;
+    border: solid 1px darkgrey;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.sold-tickets-addon.widget .already-sold {
+    border: solid 3px darkorange;
+    border-radius: 50%;
+    padding: 20px;
+}
