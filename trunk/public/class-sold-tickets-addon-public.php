@@ -97,7 +97,7 @@ class Sold_Tickets_Addon_Public {
 
         wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/sold-tickets-addon-public.js', array('jquery'), $this->version, false);
         wp_enqueue_script('d3js', '//d3js.org/d3.v3.min.js', array(), $this->version, false);
-        wp_enqueue_script('radial-progress', plugin_dir_url(__FILE__) . 'js/vendor/radialProgress.js', array('d3js'), $this->version, false);
+        wp_enqueue_script('radial-progress', plugin_dir_url(__FILE__) . 'js/vendor/prettyChart.js', array('d3js'), $this->version, false);
     }
 
     /**
