@@ -30,25 +30,16 @@
      */
 
     $(function () {
-        var charts = $('.chart.radial');
+        var charts = $('.chart.radial'),
+            options;
 
         if (charts.length !== 0) {
-            for (var index = 0; index < charts.length; index += 1) {
-                var chart = charts.eq(index),
-                    chart_value = 0,
-                    chart_diameter = 50,
-                    chart_label = null;
+            options = {
+                parentSelector: '.radial-chart',
+                svgContainerClass: 'rc-graphics'
+            };
 
-                chart_value = chart.attr('data-value');
-                chart_diameter = chart.attr('data-maxvalue');
-                chart_label = chart.attr('data-label');
-
-                radialProgress(charts.get(index))
-                    .label(chart_label)
-                    .diameter(chart_diameter)
-                    .value(chart_value)
-                    .render();
-            }
+            SimpleChart.radial.create('simple', options);
         }
     });
 })(jQuery);

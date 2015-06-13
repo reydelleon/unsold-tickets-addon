@@ -17,7 +17,10 @@
 <div class="sold-tickets-addon widget clear-fix">
     <div class="sta-grid-container">
         <div class="sta-grid-2">
-            <div class="radial chart" data-value="<?php echo $tickets_sold ?>" data-diameter="250" data-label="" data-maxvalue="100"></div>
+            <div class="radial-chart clear-fix" data-start-value="0" data-end-value="<?php echo $tickets_sold ?>"
+                 data-out-of="100" data-label="tickets sold">
+                <div class="rc-graphic"></div>
+            </div>
         </div>
         <div class="sta-grid-2">
             <span><?php echo $tickets_left ?></span> Tickets Now Available
